@@ -1,5 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <TheListComponent></TheListComponent>
   </div>
 </template>
+
+<script>
+
+import TheListComponent from '@/components/TheListComponent.vue';
+
+export default {
+  components: {
+    TheListComponent
+  },
+};
+
+</script>

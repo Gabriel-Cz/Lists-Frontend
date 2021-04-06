@@ -1,0 +1,20 @@
+<template>
+    <div>
+        <button class="bg-secondary-main hover:bg-secondary-hover transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105 text-lg px-5 py-3 shadow-md">
+            <router-link to="/user/:id/new-list">Crear Nota</router-link>
+        </button>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "CreateNoteButton",
+        data: () => ({
+            //
+        }),
+    }
+</script>
+
+<style scoped>
+
+</style>

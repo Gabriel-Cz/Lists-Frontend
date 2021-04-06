@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@layer base {
+    @font-face {
+        font-family: 'Poppins';
+        font-weight: 500;
+        src: url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    }
+    button {
+        @apply rounded-md text-white font-medium shadow-lg py-3 px-2;
+    }
+}
+
+@layer components {
+    .listCard-title {
+        @apply p-5 flex justify-center text-shadow-md font-body;
+    }
+    .listCard-body {
+        @apply bg-gray-100 rounded-sm h-80 shadow-lg p-1 overflow-auto font-body;
+    }
+}

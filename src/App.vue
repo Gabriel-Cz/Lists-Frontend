@@ -1,12 +1,11 @@
 <template>
   <div id="app" class="bg-backgroundPageColor">
-      <div class="h-screen">
+      <body>
         <router-view />
-        <p class="font-display text-center justify-self-end pt-10">SimpleLists - 2020</p>
-      </div>
+      </body>
+      <footer class="text-center">
+        <i class="mb-10">SimpleLists - 2020</i>
+      </footer>
   </div> 
 </template>
 
-<style>
-
-</style>

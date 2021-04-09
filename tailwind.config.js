@@ -14,6 +14,12 @@ module.exports = {
       body: ['Poppins', 'sans-serif'],
     },
     extend: {
+      boxShadow: theme => ({
+        boxShadow: {
+          'formShadow': "13px 13px 20px #cbced1, -13px -13px 20px #ffffff",
+          'testShadow': "10px 10px 30px black"
+        },
+      }),
       backgroundImage: theme => ({
         'small-sphere': 'url(../assets/svg/small-sphere.svg)',
         'medium-sphere': 'url(../assets/svg/medium-sphere.svg)',

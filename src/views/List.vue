@@ -1,12 +1,10 @@
 <template>
     <div>
-        <UpdateListInput />
         <TheListModel 
           :listId="listData._id"
           :title="listData.list_title"
           :items="listData.list_items"
         />
-        <DeleteListButton class="-mt-5" />
     </div>
 </template>
 
@@ -14,15 +12,11 @@
 
 import { mapState, mapActions } from 'vuex'
 import TheListModel from '@/components/TheListModel'
-import UpdateListInput from '@/components/UpdateListInput'
-import DeleteListButton from '@/components/DeleteListButton'
 
     export default {
         name: "List",
         components: {
             TheListModel,
-            UpdateListInput,
-            DeleteListButton
         },
         created(){
             this.genAndSetList()

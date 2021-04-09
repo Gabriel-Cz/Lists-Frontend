@@ -1,27 +1,31 @@
 <template>
     <div>
-            <div class="grid grid-cols-10">
-                <div class="col-span-1 my-auto md:px-4">
-                    <button class="bg-transparent m-3 shadow-none"><img src="../assets/svg/GoBackBtn.svg" /></button>
-                </div>
-                <div class="col-span-8">
-                    <div class="grid grid-cols-3 gap-24 md:px-8">
-                        <TheListModel 
-                          class="transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"
-                          v-for="list in listsData"
-                          :listId="list._id" 
-                          :key="list.index"
-                          :title="list.list_title" 
-                          :items="list.list_items"
-                          @click="toList(list._id)"
-                        />
-                    </div>
-                </div>
-                <div class="col-span-1 my-auto md:px-4">
-                    <button class="bg-transparent m-3 shadow-none"><img src="../assets/svg/SeeMoreBtn.svg" /></button>
+        <div class="grid grid-cols-12">
+            <!--
+            <div class="col-span-1 my-auto md:px-4">
+                <button class="bg-transparent m-3 shadow-none"><img src="../assets/svg/GoBackBtn.svg" /></button>
+            </div>
+            -->
+            <div class="col-span-7">
+                <div class="grid lg:grid-cols-3 xl:grid-cols-4 gap-15">
+                    <TheListModel 
+                      class="lg:col-span-4 xl:col-span-2 transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"
+                      v-for="list in listsData"
+                      :listId="list._id" 
+                      :key="list.index"
+                      :title="list.list_title" 
+                      :items="list.list_items"
+                      @click="toList(list._id)"
+                    />
                 </div>
             </div>
-            <router-view></router-view>
+            <!--
+            <div class="col-span-1 my-auto md:px-4">
+                <button class="bg-transparent m-3 shadow-none"><img src="../assets/svg/SeeMoreBtn.svg" /></button>
+            </div>
+            -->
+        </div>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -36,9 +40,6 @@ import TheListModel from '@/components/TheListModel';
         components: {
             TheListModel
         },
-        data: () => ({
-            newItems: '',
-        }),
         created() {
             this.$store.dispatch('lists/getLists');
         },

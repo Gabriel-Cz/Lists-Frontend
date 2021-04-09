@@ -1,12 +1,11 @@
 <template>
-  <div class="grid grid-cols-5 gap-6">
-        <TheListModel
+  <div>
+      <TheListModel
         v-for="lista in listas"
         :key="lista._id"
         :listTitle = lista.list_title
         :listItems = lista.list_items
-      >
-      </TheListModel>
+      />
   </div>
 </template>
 

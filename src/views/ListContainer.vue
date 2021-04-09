@@ -1,29 +1,35 @@
 <template>
     <div>
-        <div class="absolute z-20 w-full h-full left-0 top-0 bg-gray-300 bg-opacity-75 flex justify-center align-items-center">
-          <div class="grid grid-cols-12 grid-rows-2">
-              <router-view v-slot="List" class="col-span-4 z-30 row-span-1">
+        <div class="absolute rounded-lg z-20 w-2/5 h-1/2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-black bg-opacity-10 backdrop-filter backdrop-blur flex justify-center align-items-center">
+          <div class="my-5 w-1/2">
+              <router-view v-slot="List" class="z-30">
                   <transition :name="transitionName">
                       <component :is="List.Component"></component>
                   </transition>
               </router-view>
-              <div class="row-span-1">
-                 <button class="bg-secondary-main" @click="toBack()">Regresar</button>
-              </div>
+              <ListFooter />
           </div>
         </div>
     </div>
 </template>
 
 <script>
+
+import ListFooter from '@/components/ListFooter';
+
     export default {
         name: "ListContainer",
+        components: {
+            ListFooter,
+        },
         data: () => ({
             transitionName: ''
         }),
         methods: {
-            toBack() {
-                this.$router.back();
+            closeModal() {
+                this.$router.push({
+                    name: "UserLists"
+                })
             }
         },
         watch: {

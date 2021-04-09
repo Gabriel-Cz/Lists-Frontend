@@ -2,7 +2,7 @@
     <div>          
         <div>
             <TheFormComponentNavbar />
-            <form class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 w-full border-l-2 border-b-2 shadow-md">
+            <form class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 w-full xl:w-1/2 border-l-2 border-b-2 testShadow">
                 <router-view class="mt-10"></router-view>
             </form>
             <button type="submit" @click="signUp()">Register</button>

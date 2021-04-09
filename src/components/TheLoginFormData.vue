@@ -1,11 +1,8 @@
 <template>
     <div>
         <div class="w-full px-6 py-3">
-            <label>
-                <div class="relative -mb-2 -ml-1 rounded-full w-2.5 h-2.5 bg-gray-400"></div>
-            </label>
             <input 
-              class="w-full rounded-md shadow-md p-3 focus:outline-none focus:.divDot:bg-blue-300"
+              class="w-full rounded-md shadow-inner p-3 focus:outline-none focus:.divDot:bg-blue-300"
               v-model="inputOnTheStore.email" 
               name="email" 
               type="email" 
@@ -13,9 +10,6 @@
             />
         </div>
         <div class="w-full px-6 py-3">
-            <label>
-                <div class="relative -mb-2 -ml-1 rounded-full w-2.5 h-2.5 bg-gray-400"></div>
-            </label>
             <input 
               class="w-full rounded-md shadow-md p-3 focus:outline-none focus:.divDot:bg-blue-300"
               v-model="inputOnTheStore.password" 

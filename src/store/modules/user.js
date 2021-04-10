@@ -5,6 +5,7 @@ import decode from 'jwt-decode'
 const state = () => ({
     token: localStorage.getItem('token') || '',
     userDB: '',
+    message: '',
     userInput: {
       email: '',
       password: ''
@@ -26,6 +27,9 @@ const mutations = {
     setUser(state, payload) {
         state.newUser = payload
     },
+    setMessage(state, payload) {
+      state.message = payload
+    },
     getUser(state, payload) {
         state.token = payload
         if(payload === '') {
@@ -35,7 +39,7 @@ const mutations = {
             router.push({
                 path: '/user/:id'
             })
-        }
+      }
     },
     cleanUserInput(state) {
       state.userInput.email = "";
@@ -51,16 +55,23 @@ const mutations = {
 const actions = {
 
     registerUser({commit, state, dispatch}, payload) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
           payload = state.newUserInput;
           axios.post('/users/new-user', payload)
-          setTimeout(() => {
-            dispatch('loginUser', {email: payload.email, password: payload.password})
+          .then(() => {
             setTimeout(() => {
-               commit('cleanNewUserInput');
-            }, 100)
-          }, 200)
-          resolve();
+              dispatch('loginUser', {email: payload.email, password: payload.password})
+              setTimeout(() => {
+                 commit('cleanNewUserInput');
+              }, 100)
+            }, 200)
+          }, resolve())
+          .catch(e => {
+            reject(() => {
+              const message = e.response.message;
+              commit('setMessage', message);
+            })
+          })
         })
     }, 
 
@@ -77,8 +88,8 @@ const actions = {
             commit('cleanUserInput');
            }, 200)
          })
-         .catch(err => {
-           console.log(err);
+         .catch(error => {
+           console.log(error.message);
        })
     },
 

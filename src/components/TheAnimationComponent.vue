@@ -1,18 +1,15 @@
 <template>
     <div>
-        <div class="md:grid md:grid-cols-2 justify-items-center">
-            <div class="md:col-span-2 w-full">
-                <div class="container grid grid-cols-2 md:-mt-20 md:flex md:flex-wrap">
-                    <img class="" src="../assets/svg/big-sphere.svg" />            
-                    <img class="md:ml-40 pl-10" src="../assets/svg/small-sphere.svg" />
+        <div class="container flex flex-col justify-center">
+            <div class="text-center">
+                <div class="my-2 font-display text-sm">
+                    <i>Compras, cena, regalos...</i>
                 </div>
-            </div>
-            <div class="text-center -mt-24 md:col-span-2 md:-mt-80 md:flex md:flex-wrap md:content-center md:mr-10">
-                <h1 class="text-xl font-regular text-shadow-lg md:tracking-wide md:text-2xl" >Crea Listas sencilas en instantes.</h1>
-            </div>
-            <div class="md:col-span-2 mt-10 md:-mt-20 md:mr-10">
-                <div class="container">
-                    <img class=" " src="../assets/svg/AnimationComponentImage.png" />
+                <div class="my-4 font-display text-lg">
+                    Crea y comparte listas de la manera mas simple.
+                </div>
+                <div class="lg:mt-5">
+                    <img src="../assets/svg/AnimationComponentImage.png" />
                 </div>
             </div>
         </div>

@@ -13,9 +13,6 @@ import TheRegisterFormData from '@/components/TheRegisterFormData';
         components: {
             TheRegisterFormData,
         },
-        data: () => ({
-            
-        }),
     }
 </script>
 

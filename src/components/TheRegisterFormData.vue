@@ -1,11 +1,8 @@
 <template>
     <div>       
         <div class="w-full px-6 py-3">
-            <label> 
-              <div class="relative -mb-2 -ml-1 rounded-full w-2.5 h-2.5 bg-gray-400"></div>
-            </label>
             <input 
-              class="w-full rounded-md shadow-md p-3 focus:outline-none" 
+              class="w-full rounded-md p-3 focus:outline-none inputShadow bg-transparent" 
               name="username" 
               type="text" 
               placeholder="Nombre de usuario" 
@@ -13,11 +10,8 @@
             />
         </div>
         <div class="w-full px-6 py-3">
-            <label> 
-              <div class="relative -mb-2 -ml-1 rounded-full w-2.5 h-2.5 bg-gray-400"></div>
-            </label>
             <input 
-              class="w-full rounded-md shadow-md p-3 focus:outline-none" 
+              class="w-full rounded-md p-3 focus:outline-none inputShadow bg-transparent" 
               name="email" 
               type="email" 
               placeholder="Correo electronico" 
@@ -25,11 +19,8 @@
             />
         </div>
         <div class="w-full px-6 py-3">
-            <label> 
-              <div class="relative -mb-2 -ml-1 rounded-full w-2.5 h-2.5 bg-gray-400"></div>
-            </label>
             <input 
-              class="w-full rounded-md shadow-md p-3 focus:outline-none" 
+              class="w-full rounded-md p-3 focus:outline-none inputShadow bg-transparent" 
               name="password" 
               type="password" 
               placeholder="Contraseña" 
@@ -37,11 +28,8 @@
             />
         </div>
         <div class="w-full px-6 py-3">
-            <label> 
-              <div class="relative -mb-2 -ml-1 rounded-full w-2.5 h-2.5 bg-gray-400"></div>
-            </label>
             <input 
-              class="w-full rounded-md shadow-md p-3 focus:outline-none" 
+              class="w-full rounded-md p-3 focus:outline-none inputShadow bg-transparent" 
               name="confirmPassword" 
               type="password" 
               placeholder="Confirmar contraseña" 

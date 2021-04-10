@@ -1,6 +1,6 @@
 <template>
     <div id="the-logo">
-        <div class="font-thin text-2xl">MinimalistLists.git</div>
+        <div class="font-thin text-4xl opacity-0.5">SharedLists.</div>
     </div>
 </template>
 

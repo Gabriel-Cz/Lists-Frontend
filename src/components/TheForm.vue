@@ -1,40 +1,36 @@
 <template>
-    <div>          
-        <div>
+    <div>             
+        <div class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 w-full formShadow">
             <TheFormComponentNavbar />
-            <form class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 w-full xl:w-1/2 border-l-2 border-b-2 testShadow">
-                <router-view class="mt-10"></router-view>
+            <form class="mx-2 my-2 mt-5">
+                <router-view />
             </form>
-            <button type="submit" @click="signUp()">Register</button>
+            <div v-show="message"></div>
             <TheFormFooter />
         </div>
     </div>
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
 import TheFormComponentNavbar from '../components/TheFormComponentNavbar'
 import TheFormFooter from '../components/TheFormFooter'
 
     export default {
         name: "TheForm",
-        data: () => ({
-            transitionName: "",
-        }),
         components: {
             TheFormComponentNavbar,
             TheFormFooter
         },
-        watch: {
-            '$route' (to) {
-                to.path === '/login' ? this.transitionName = 'slide-right' : this.transitionName = 'slide-left';
-            },  
+        computed: {
+          ...mapState('user', {
+            message: state => state.message,
+          })
         }
     }
 </script>
 
 <style scoped>
-
 .slide-right-enter,
 .slide-right-leave-to{
   opacity: 0;
@@ -56,5 +52,4 @@ import TheFormFooter from '../components/TheFormFooter'
 .slide-left-leave-active{
   transition: all 0.3s ease;
 }
-
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="flex justify-center">
-            <div class="md:px-4 py-3 md:mr-2 text-xs" v-show="$route.name === 'Register'"><router-link :to="{name: 'Login'}">Ya tienes Cuenta? <br/>Inicia Sesion ahora.</router-link></div>
-            <div class="md:px-4 py-3 md:mr-2 text-xs" v-show="$route.name === 'Login'"><router-link :to="{name: 'Register'}">Aun no tienes Cuenta? <br/>Registrate ahora.</router-link></div>
-            <FormSubmitButton :submitTo="$route.name"/>
+        <div class="flex justify-center py-4 border-t border-gray-300 md:mx-8 mt-5">
+            <div class="mr-4 mt-3 text-xs" v-show="$route.name === 'Register'"><router-link :to="{name: 'Login'}">Ya tienes Cuenta? <br/>Inicia Sesion ahora.</router-link></div>
+            <div class="mr-4 mt-3 text-xs" v-show="$route.name === 'Login'"><router-link :to="{name: 'Register'}">Aun no tienes Cuenta? <br/>Registrate ahora.</router-link></div>
+            <FormSubmitButton class="mt-3 md:ml-3" :submitTo="$route.name"/>
         </div>
     </div>
 </template>

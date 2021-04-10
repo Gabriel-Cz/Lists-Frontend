@@ -1,26 +1,23 @@
 <template>
   <div class="home">
-    <TheLogo class="md:pt-4 md:pl-4" />
-    <div class="grid grid-rows-2 md:grid md:grid-cols-5 justify-items-center">
-      <div class="row md:col-span-2 order-last md:order-first w-full">
-        <div class="md:mt-10">
-          <div class="py-10 md:pl-6">
-            <p class="font-thin text-center text-lg tracking-wide">Registrate y comienza a crear Listas.</p>
-          </div>
-          <div class="md:mx-20 mx-5">
-            <TheForm />
-          </div>
+    <div class="container mx-auto">
+      <TheLogo class="md:pt-4 md:pl-4" />
+    <div class="grid grid-rows-2 md:grid md:grid-cols-2 place-items-center">
+      <div class="row order-last md:col-span-1 md:order-first xl:pt-5 2xl:pt-5 w-full flex flex-col justify-center items-center">
+        <div class="xl:py-5">
+          <p class="font-thin text-center text-lg tracking-wide">Registrate y comienza a crear Listas.</p>
         </div>
+        <TheForm class="w-full lg:w-7/12 xl:1/2 xl:mt-5 2xl:mt-15" />
       </div>
-      <div class="row md:col-span-3 w-full">
+      <div class="row md:col-span-1 w-full flex justify-center items-center">
         <TheAnimationComponent />
       </div>      
+    </div>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import TheLogo from '@/components/TheLogo'
 import TheForm from '@/components/TheForm';
 import TheAnimationComponent from '@/components/TheAnimationComponent';

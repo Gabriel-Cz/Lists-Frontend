@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 @layer base {
     @font-face {
         font-family: 'Poppins';
         font-weight: 500;
         src: url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    }
+    @font-face {
+        font-family: 'Raleway';
+        font-weight: 400;
+        src: url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
     }
     button {
         @apply rounded-md text-white font-medium shadow-lg py-3 px-2;
@@ -21,5 +27,11 @@
     }
     .listCard-body {
         @apply bg-gray-100 rounded-sm h-80 shadow-lg p-1 overflow-auto font-body;
+    }
+    .formShadow {
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+    }
+    .inputShadow {
+        box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
     }
 }

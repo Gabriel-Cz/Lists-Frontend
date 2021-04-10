@@ -10,18 +10,12 @@ module.exports = {
 
     }),
     fontFamily: {
-      display: ['Roboto', 'serif'],
+      display: ['Raleway', 'sans-serif'],
       body: ['Poppins', 'sans-serif'],
     },
     extend: {
-      boxShadow: theme => ({
-        boxShadow: {
-          'formShadow': "13px 13px 20px #cbced1, -13px -13px 20px #ffffff",
-          'testShadow': "10px 10px 30px black"
-        },
-      }),
       backgroundImage: theme => ({
-        'small-sphere': 'url(../assets/svg/small-sphere.svg)',
+        'shapes': 'url(../assets/svg/Shapes.svg)',
         'medium-sphere': 'url(../assets/svg/medium-sphere.svg)',
         'big-sphere': 'url(../assets/svg/big-sphere.svg)',
         'bg-form-pattern': 'linear-gradient(54.58deg, rgba(224, 224, 224, 0.25) 8.37%, rgba(250, 250, 250, 0) 98.69%);',

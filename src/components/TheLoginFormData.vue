@@ -2,7 +2,7 @@
     <div>
         <div class="w-full px-6 py-3">
             <input 
-              class="w-full rounded-md shadow-inner p-3 focus:outline-none focus:.divDot:bg-blue-300"
+              class="w-full rounded-md p-3 focus:outline-none focus:.divDot:bg-blue-300 inputShadow bg-transparent"
               v-model="inputOnTheStore.email" 
               name="email" 
               type="email" 
@@ -11,7 +11,7 @@
         </div>
         <div class="w-full px-6 py-3">
             <input 
-              class="w-full rounded-md shadow-md p-3 focus:outline-none focus:.divDot:bg-blue-300"
+              class="w-full rounded-md p-3 focus:outline-none focus:.divDot:bg-blue-300 inputShadow bg-transparent"
               v-model="inputOnTheStore.password" 
               name="password" 
               type="password" 

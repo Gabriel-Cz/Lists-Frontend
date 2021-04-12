@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="absolute rounded-lg z-20 w-2/5 h-1/2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-black bg-opacity-10 backdrop-filter backdrop-blur flex justify-center align-items-center">
-          <div class="my-5 w-1/2">
+        <div class="absolute rounded-lg z-20 w-2/5 xl:h-3/4 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-black bg-opacity-10 backdrop-filter backdrop-blur-3xl flex justify-center align-items-center">
+          <div class="my-5 2xl:w-8/12">
               <router-view v-slot="List" class="z-30">
                   <transition :name="transitionName">
                       <component :is="List.Component"></component>

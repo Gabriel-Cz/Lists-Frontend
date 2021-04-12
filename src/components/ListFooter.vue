@@ -1,7 +1,7 @@
 <template>
-    <div class="justify-center mt-5 d-flex">
-        <button @click="closeModal()">Regresar</button>
-        <DeleteListButton />
+    <div class="justify-items-center mt-5 flex">
+        <button class="mx-2 bg-yellow-400" @click="closeModal()">Regresar</button>
+        <DeleteListButton class="mx-2" />
     </div>
 </template>
 
@@ -15,7 +15,7 @@ import DeleteListButton from '@/components/DeleteListButton';
         },
         methods: {
             closeModal() {
-                this.$router.push({
+                this.$router.push({ 
                     name: "UserLists"
                 })
             }

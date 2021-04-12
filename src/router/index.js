@@ -45,8 +45,8 @@ const routes = [
           },
           {
             path: 'new-list',
-            name: 'UserNewListContainer',
-            component: () => import(/* webpackChunkName: "UserNewListContainer" */ '../views/UserNewListContainer'),
+            name: 'NewListContainer',
+            component: () => import(/* webpackChunkName: "NewListContainer" */ '../views/NewListContainer'),
             children: [
               {
                 path: '',

@@ -68,7 +68,7 @@ const actions = {
           }, resolve())
           .catch(e => {
             reject(() => {
-              const message = e.response.message;
+              const message = e.response.data.message;
               commit('setMessage', message);
             })
           })
@@ -88,8 +88,13 @@ const actions = {
             commit('cleanUserInput');
            }, 200)
          })
-         .catch(error => {
-           console.log(error.message);
+         .catch(err => {
+           console.log(err.response.data.message);
+           const message = err.response.data.message;
+           commit('setMessage', message);
+           setTimeout(() => {
+            commit('setMessage', '');
+           }, 5000)
        })
     },
 

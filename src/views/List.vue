@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TheListModel 
+        <TheListEditModel 
           :listId="listData._id"
           :title="listData.list_title"
           :items="listData.list_items"
@@ -11,12 +11,12 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
-import TheListModel from '@/components/TheListModel'
+import TheListEditModel from '@/components/TheListEditModel'
 
     export default {
         name: "List",
         components: {
-            TheListModel,
+            TheListEditModel,
         },
         created(){
             this.genAndSetList()

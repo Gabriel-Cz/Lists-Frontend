@@ -29,6 +29,41 @@ export default {
     TheForm,
     TheAnimationComponent
   },
+  data: () => ({
+    transitionName: ''
+  }),
+  watch: {
+    '$route' (to) {
+        to.path === '/login' ? this.transitionName = 'slide-right' : this.transitionName = 'slide-left';
+    }
+  }
 }
 </script>
 
+<style scoped>
+.slide-right-enter,
+.slide-right-leave-to{
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active{
+  transition: all 0.3s ease;
+}
+
+.slide-right-enter-active{
+  transition-delay: 500ms;
+}
+
+.slide-left-enter,
+.slide-left-leave-to{
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active{
+  transition: all 0.3s ease;
+}
+</style>

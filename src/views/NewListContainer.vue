@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="absolute rounded-lg z-20 w-2/5 h-1/2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-black bg-opacity-10 backdrop-filter backdrop-blur flex justify-center align-items-center">
+        <div class="absolute rounded-lg z-20 w-2/5 h-1/2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-black bg-opacity-10 backdrop-filter backdrop-blur-3xl flex justify-center align-items-center">
           <div class="mt-5 w-1/2">
               <router-view v-slot="NewList">
-                  <transition name="fadeIn">
+                  <transition name="fadeIn" mode="fade-in">
                       <component :is="NewList.Component"></component>
                   </transition>
               </router-view>
@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: "UserNewListContainer",
+        name: "NewListContainer",
     }
 </script>
 

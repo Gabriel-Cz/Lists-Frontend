@@ -6,10 +6,12 @@ const state = () => ({
       title: "",
       items: ""
     },
-    listUpdateInput: {
+    updateListInput: {
       listId: "",
-      newItems: ""
+      newTitle: "",
+      newItems: ['item', 'item 2']
     },
+    sharedUser: '',
     newList: '',
     listsData: '',
     listData: '',
@@ -23,14 +25,26 @@ const mutations = {
     setInput(state, payload) {
       state.newListInput = payload
     },
-  
+
+    setNewTitle(state, payload) {
+      state.updateListInput.newTitle = payload
+    },
+
+    setNewItems(state, payload) {
+      state.updateListInput.newItems = payload
+    },
+
     setList(state, payload) {
         state.listData = payload
-      },
+    },
 
     setLists(state, payload) {
       state.listsData = payload
     },
+    
+    setSharedUser(state, payload) {
+      state.sharedUser = payload
+    }
 }
 
 const actions = {
@@ -45,9 +59,8 @@ const actions = {
         .then(res => {
           console.log(res.data)
           this.state.listsData = res.data
-          console.log(rootState.lists.listsData)
         })
-        .catch(e => {console.log(e)})
+        .catch(e => {window.alert(e)})
       },  
   
     getList({commit, rootState}, id) {
@@ -60,7 +73,7 @@ const actions = {
         .then(res => {
           commit('setList', res.data)
         })
-        .catch(e => {console.log(e)})
+        .catch(e => {window.alert(e)})
       },
   
     postList({dispatch, rootState}, list) {
@@ -71,8 +84,7 @@ const actions = {
         }
         return new Promise((resolve, reject) => {
           axios.post('/api/new-list', list, config)
-          .then(res => {
-            console.log(res.data)
+          .then(() => {
             setTimeout(() => {
               dispatch('getLists')
               router.push({
@@ -81,7 +93,10 @@ const actions = {
             }, 20)
           },
           resolve())
-          .catch(e => {console.log(e)}, reject())
+          .catch(e => {
+            window.alert(e)
+            reject()
+          })
         })
       },
     deleteList({dispatch, rootState}, id) {
@@ -104,27 +119,72 @@ const actions = {
           .catch(e => {console.log(e)}, reject())
         })
       },
-      updateList({dispatch, rootState}, body) {
-        let config = {
-          headers: {
-            token: rootState.user.token
-          }
+    updateTitle({dispatch, state, rootState}, id, body) {
+      let config = {
+        headers: {
+          token: rootState.user.token
         }
-        return new Promise((resolve, reject) => {
-          let id = body.id
-          axios.put('/api/list/' + id, body, config)
-          .then(res => {
-            console.log(res.data)
-            setTimeout(() => {
-              dispatch('getLists')
-              router.push({
-                name: 'UserLists'
-              })
-            }, 20)
-          }, resolve())
-          .catch(e => {console.log(e)}, reject())
-        })
       }
+      body = {newTitle: state.updateListInput.newTitle};
+      return new Promise((resolve, reject) => {
+        axios.put('/api/list/updateTitle/' + id, body, config)
+        .then(res => {
+          console.log(res.data)
+          setTimeout(() => {
+            dispatch('getLists')
+            router.push({
+              name: 'UserLists'
+            })
+          }, 20)
+        }, resolve())
+        .catch(e => {console.log(e)}, reject())
+      })
+    },
+    addNewItems({dispatch, state, rootState}, id, body) {
+      let config = {
+        headers: {
+          token: rootState.user.token
+        }
+      }
+      body = {newItems: state.updateListInput.newItems};
+      console.log(body)
+      return new Promise((resolve, reject) => {
+        axios.put('/api/list/addNewItems/' + id, body, config)
+        .then(res => {
+          console.log(res.data)
+          setTimeout(() => {
+            dispatch('getLists')
+            router.push({
+              name: 'UserLists'
+            })
+          }, 20)
+        }, resolve())
+        .catch(e => {console.log(e)}, reject())
+      })
+    },
+    addSharedUser({dispatch, state, rootState}, id) {
+      let config = {
+        headers: {
+          token: rootState.user.token
+        }
+      }
+      const body = {
+        sharedUserId: state.sharedUser,
+      }
+      return new Promise((resolve, reject) => {
+        axios.put('/api/list/shareList/' + id, body, config)
+        .then(res => {
+          console.log(res.data)
+          setTimeout(() => {
+            dispatch('getLists')
+            router.push({
+              name: 'UserLists'
+            })
+          }, 20)
+        }, resolve())
+        .catch(e => {console.log(e)}, reject())
+      })
+    }
 }
 
 const getters = {

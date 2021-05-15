@@ -6,6 +6,7 @@ const state = () => ({
     token: localStorage.getItem('token') || '',
     userDB: '',
     message: '',
+    loading: true,
     userInput: {
       email: '',
       password: ''
@@ -29,6 +30,9 @@ const mutations = {
     },
     setMessage(state, payload) {
       state.message = payload
+    },
+    setLoading(state, payload) {
+      state.loading = payload;
     },
     getUser(state, payload) {
         state.token = payload
@@ -59,8 +63,10 @@ const actions = {
           payload = state.newUserInput;
           axios.post('/users/new-user', payload)
           .then(() => {
-            setTimeout(() => {
-              dispatch('loginUser', {email: payload.email, password: payload.password})
+            commit('setLoading', true);
+            setTimeout(async() => {
+              await dispatch('loginUser', {email: payload.email, password: payload.password})
+              commit('setLoading', false);
               setTimeout(() => {
                  commit('cleanNewUserInput');
               }, 100)
@@ -80,8 +86,10 @@ const actions = {
     loginUser({commit, dispatch}, user) {
         axios.post('/login', user)
          .then(res => {
+           commit('setLoading', true);
            let token = res.data.token;
            dispatch('saveUser', token)
+           commit('setLoading', false);
            router.push({
              path: '/user/' + user.name 
            });

@@ -7,8 +7,8 @@
 
 <script>
 
-import TheNewListModel from '@/components/TheNewListModel';
-import NewListFooter from '@/components/NewListFooter';
+import TheNewListModel from '@/components/ListsModels/TheNewListModel';
+import NewListFooter from '@/components/ListsComponents/NewListFooter';
 
     export default {
         name: "NewList",

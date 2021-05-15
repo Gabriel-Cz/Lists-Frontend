@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="justify-items-center mt-5">
-            <button class="text-white bg-secondary-main mx-2" @click="submitList()">Crear Lista</button>
-            <button class="text-white bg-danger-main mx-2" @click="closeModal()">Cancelar</button>
+        <div class="flex justify-end -mt-5 xl:-mr-10">
+            <button class="text-white font-regular py-2 px-3 bg-secondary-main transition ease-in-out 500ms hover:bg-secondary-hover mx-2" @click="submitList()">Crear Lista</button>
+            <button class="text-white font-regular py-2 px-3 bg-danger-main transition ease-in-out 500ms hover:bg-danger-hover mx-2" @click="closeModal()">Cancelar</button>
         </div>
     </div>
 </template>

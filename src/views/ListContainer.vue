@@ -15,7 +15,7 @@
 
 <script>
 
-import ListFooter from '@/components/ListFooter';
+import ListFooter from '@/components/ListsComponents/ListFooter';
 
     export default {
         name: "ListContainer",

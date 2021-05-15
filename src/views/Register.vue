@@ -6,7 +6,7 @@
 
 <script>
 
-import TheRegisterFormData from '@/components/TheRegisterFormData';
+import TheRegisterFormData from '@/components/FormComponents/TheRegisterFormData';
 
     export default {
         name: "Register",

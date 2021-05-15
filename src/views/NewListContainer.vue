@@ -1,9 +1,20 @@
 <template>
     <div>
-        <div class="absolute rounded-lg z-20 w-2/5 h-1/2 top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-black bg-opacity-10 backdrop-filter backdrop-blur-3xl flex justify-center align-items-center">
-          <div class="mt-5 w-1/2">
+        <div 
+         class="
+          absolute rounded-xl 
+          z-20 xl:w-2/5 xl:h-3/5 
+          top-1/2 left-1/2 
+          transform -translate-y-1/2 -translate-x-1/2 
+          bg-gray-300 bg-opacity-50 
+          backdrop-filter backdrop-blur-3xl 
+          flex justify-center align-items-center">
+          <div class="
+               xl:mt-20 xl:w-1/2
+               p-5
+               ">
               <router-view v-slot="NewList">
-                  <transition name="fadeIn" mode="fade-in">
+                  <transition name="fadeIn" mode="out-in">
                       <component :is="NewList.Component"></component>
                   </transition>
               </router-view>
@@ -23,24 +34,13 @@
 .fadeIn-enter, 
 .fadeIn-leave-to{
     opacity: 0;
-    transition: all ease;
-    animation: fadeIn 2s;
-    animation-delay: 1s;
+    transition: 0.3s ease-in-out;
 }
 
-.fadeIn-enter-active{
+.fadeIn-enter-active
+.fadeIn-leave-to-active{
     opacity: 1;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translate(0, 0);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50, -50);
-    }
+    transition: 0.3s ease-in-out;
 }
 
 </style>

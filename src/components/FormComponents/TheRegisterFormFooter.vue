@@ -11,7 +11,7 @@
 
 <script>
 
-import FormRegisterSubmitButton from '@/components/FormRegisterSubmitButton';
+import FormRegisterSubmitButton from '@/components/Buttons/FormRegisterSubmitButton';
 
     export default {
         name: "TheRegisterFormFooter",

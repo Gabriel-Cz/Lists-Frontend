@@ -11,7 +11,7 @@
 
 <script>
 
-import TheListModel from '@/components/TheListModel';
+import TheListModel from '@/components/ListsModels/TheListModel';
 
 export default {
     name: "TheListComponent",

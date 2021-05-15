@@ -9,7 +9,7 @@ const state = () => ({
     updateListInput: {
       listId: "",
       newTitle: "",
-      newItems: ['item', 'item 2']
+      newItems: "",
     },
     sharedUser: '',
     newList: '',
@@ -132,8 +132,9 @@ const actions = {
           console.log(res.data)
           setTimeout(() => {
             dispatch('getLists')
+            dispatch('getList', id)
             router.push({
-              name: 'UserLists'
+              path: '/'
             })
           }, 20)
         }, resolve())
@@ -146,7 +147,9 @@ const actions = {
           token: rootState.user.token
         }
       }
-      body = {newItems: state.updateListInput.newItems};
+      body = {
+        newItems: state.updateListInput.newItems.split(',')
+      };
       console.log(body)
       return new Promise((resolve, reject) => {
         axios.put('/api/list/addNewItems/' + id, body, config)
@@ -154,9 +157,8 @@ const actions = {
           console.log(res.data)
           setTimeout(() => {
             dispatch('getLists')
-            router.push({
-              name: 'UserLists'
-            })
+            dispatch('getList', id)
+            
           }, 20)
         }, resolve())
         .catch(e => {console.log(e)}, reject())

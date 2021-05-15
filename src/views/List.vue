@@ -11,7 +11,7 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
-import TheListEditModel from '@/components/TheListEditModel'
+import TheListEditModel from '@/components/ListsModels/TheListEditModel'
 
     export default {
         name: "List",

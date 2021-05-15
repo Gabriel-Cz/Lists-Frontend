@@ -1,9 +1,9 @@
 <template>
     <div>
         <button @click="$route.name === 'Login' ? login() : signUp()" class="
-          border text-blue-300 border-blue-300 
+          border text-blue-400 border-blue-300 
           hover:border-2 hover:text-white hover:border-blue-400 hover:bg-blue-400 py-2 px-4 
-          tracking-widest bg-transparent shadow-none font-display font-semibold text-sm 
+          tracking-widest bg-transparent shadow-none font-display font-semibold text-sm spac
           transition duration-500 ease-in-out"
         >
            {{$props.submitTo}}

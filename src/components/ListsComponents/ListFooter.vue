@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import DeleteListButton from '@/components/DeleteListButton';
+import DeleteListButton from '@/components/Buttons/DeleteListButton';
 
     export default {
         name: "ListFooter",

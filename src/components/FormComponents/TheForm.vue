@@ -4,7 +4,7 @@
             <TheFormComponentNavbar />
             <form class="mx-2 my-2 mt-5">
                 <router-view v-slot="Form">
-                  <transition :name="transitionName">
+                  <transition :name="transitionName" mode="out-in">
                     <component :is="Form.Component" />
                   </transition>
                 </router-view>
@@ -19,8 +19,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import TheFormComponentNavbar from '../components/TheFormComponentNavbar'
-import TheFormFooter from '../components/TheFormFooter'
+import TheFormComponentNavbar from '../FormComponents/TheFormComponentNavbar'
+import TheFormFooter from '../FormComponents/TheFormFooter'
 
     export default {
         name: "TheForm",
@@ -48,26 +48,24 @@ import TheFormFooter from '../components/TheFormFooter'
 .slide-right-enter,
 .slide-right-leave-to{
   opacity: 0;
+  transition: all 0.3s ease-in-out;
   transform: translateX(-50px);
 }
 
 .slide-right-enter-active,
 .slide-right-leave-active{
-  transition: all 0.3s ease;
-}
-
-.slide-right-enter-active{
-  transition-delay: 500ms;
+  transition: all 0.3s ease-in-out;
 }
 
 .slide-left-enter,
 .slide-left-leave-to{
+  transition: all 0.3s ease-in-out;
   opacity: 0;
   transform: translateX(50px);
 }
 
 .slide-left-enter-active,
 .slide-left-leave-active{
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 </style>

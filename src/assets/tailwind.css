@@ -17,7 +17,7 @@
         src: url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
     }
     button {
-        @apply rounded-md text-white font-medium shadow-lg py-3 px-2;
+        @apply rounded-md tracking-wide text-white font-medium shadow-lg py-3 px-2;
     }
 }
 

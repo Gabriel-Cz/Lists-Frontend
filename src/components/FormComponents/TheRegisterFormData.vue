@@ -76,5 +76,4 @@ import { mapActions, mapState } from 'vuex';
     background-color: rgb(161, 161, 161);
 }
 
-
 </style>

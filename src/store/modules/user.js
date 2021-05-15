@@ -66,11 +66,13 @@ const actions = {
               }, 100)
             }, 200)
           }, resolve())
-          .catch(e => {
-            reject(() => {
-              const message = e.response.data.message;
-              commit('setMessage', message);
-            })
+          .catch(err => {
+            const message = err.response.data.message;
+            commit('setMessage', message);
+            setTimeout(() => {
+            commit('setMessage', '');
+            }, 2000)
+            reject();
           })
         })
     }, 
@@ -80,7 +82,6 @@ const actions = {
          .then(res => {
            let token = res.data.token;
            dispatch('saveUser', token)
-           console.log(token)
            router.push({
              path: '/user/' + user.name 
            });
@@ -89,12 +90,11 @@ const actions = {
            }, 200)
          })
          .catch(err => {
-           console.log(err.response.data.message);
            const message = err.response.data.message;
            commit('setMessage', message);
            setTimeout(() => {
             commit('setMessage', '');
-           }, 5000)
+           }, 2000)
        })
     },
 

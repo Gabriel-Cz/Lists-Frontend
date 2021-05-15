@@ -7,7 +7,7 @@
 
 <script>
 
-import TheUserHeader from '@/components/TheUserHeader';
+import TheUserHeader from '@/components/UserComponents/TheUserHeader';
 
     export default {
         name: "User",

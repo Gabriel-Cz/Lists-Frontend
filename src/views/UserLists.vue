@@ -1,29 +1,17 @@
 <template>
     <div>
-        <div class="grid grid-cols-12">
-            <!--
-            <div class="col-span-1 my-auto md:px-4">
-                <button class="bg-transparent m-3 shadow-none"><img src="../assets/svg/GoBackBtn.svg" /></button>
+        <div class="container mx-auto">
+            <div class="grid grid-cols-12 sm:gap-7 xl:gap-16 mx-5 xl:mx-20">
+                <TheListModel 
+                  class=" col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-4 transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"
+                  v-for="list in listsData"
+                  :listId="list._id" 
+                  :key="list.index"
+                  :title="list.list_title" 
+                  :items="list.list_items"
+                  @click="toList(list._id)"
+                />
             </div>
-            -->
-            <div class="col-span-7">
-                <div class="grid lg:grid-cols-3 xl:grid-cols-4 gap-15">
-                    <TheListModel 
-                      class="lg:col-span-4 xl:col-span-2 transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"
-                      v-for="list in listsData"
-                      :listId="list._id" 
-                      :key="list.index"
-                      :title="list.list_title" 
-                      :items="list.list_items"
-                      @click="toList(list._id)"
-                    />
-                </div>
-            </div>
-            <!--
-            <div class="col-span-1 my-auto md:px-4">
-                <button class="bg-transparent m-3 shadow-none"><img src="../assets/svg/SeeMoreBtn.svg" /></button>
-            </div>
-            -->
         </div>
         <router-view></router-view>
     </div>
@@ -33,7 +21,7 @@
 
 import { mapActions, mapState } from 'vuex'
 
-import TheListModel from '@/components/TheListModel';
+import TheListModel from '@/components/ListsModels/TheListModel';
 
     export default {
         name: "UserLists",

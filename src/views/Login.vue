@@ -6,7 +6,7 @@
 
 <script>
 
-import TheLoginFormData from '@/components/TheLoginFormData'
+import TheLoginFormData from '@/components/FormComponents/TheLoginFormData'
 
     export default {
         name: "Login",

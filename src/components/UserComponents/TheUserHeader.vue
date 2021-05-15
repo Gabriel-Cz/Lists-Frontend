@@ -16,7 +16,7 @@
 
 <script>
 
-import CreateNoteButton from '@/components/CreateNoteButton';
+import CreateNoteButton from '@/components/Buttons/CreateNoteButton';
 import { mapActions } from 'vuex';
 
     export default {

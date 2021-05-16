@@ -2,7 +2,7 @@
   <div class="home">
     <div class="container mx-auto">
       <TheLogo class="md:pt-4 md:pl-4" />
-      <div class="grid grid-rows-2 md:grid md:grid-cols-2 place-items-center">
+      <div class="grid grid-rows-2 md:grid-rows-none md:grid-cols-2">
         <div class="row order-last md:col-span-1 md:order-first xl:pt-5 2xl:pt-5 w-full flex flex-col justify-center items-center">
           <div class="xl:py-5">
             <p class="font-thin text-center mt-10 xl:mt-0 3xl:mt-10 text-lg tracking-wide">Registrate y comienza a crear Listas.</p>

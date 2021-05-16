@@ -6,7 +6,7 @@ const state = () => ({
     token: localStorage.getItem('token') || '',
     userDB: '',
     message: '',
-    loading: true,
+    loading: false,
     userInput: {
       email: '',
       password: ''
@@ -61,18 +61,18 @@ const actions = {
     registerUser({commit, state, dispatch}, payload) {
         return new Promise((resolve, reject) => {
           payload = state.newUserInput;
+          commit('setLoading', true);
           axios.post('/users/new-user', payload)
           .then(() => {
-            commit('setLoading', true);
             setTimeout(async() => {
               await dispatch('loginUser', {email: payload.email, password: payload.password})
-              commit('setLoading', false);
               setTimeout(() => {
                  commit('cleanNewUserInput');
               }, 100)
             }, 200)
           }, resolve())
           .catch(err => {
+            commit('setLoading', false);
             const message = err.response.data.message;
             commit('setMessage', message);
             setTimeout(() => {
@@ -83,12 +83,12 @@ const actions = {
         })
     }, 
 
-    loginUser({commit, dispatch}, user) {
+    loginUser({commit, state, dispatch}, user) {
+      commit('setLoading', state.loading === false ? true : false);
         axios.post('/login', user)
          .then(res => {
-           commit('setLoading', true);
            let token = res.data.token;
-           dispatch('saveUser', token)
+           dispatch('saveUser', token);
            commit('setLoading', false);
            router.push({
              path: '/user/' + user.name 
@@ -96,8 +96,10 @@ const actions = {
            setTimeout(() => {
             commit('cleanUserInput');
            }, 200)
+           commit('setLoading', false);
          })
          .catch(err => {
+           commit('setLoading', false);
            const message = err.response.data.message;
            commit('setMessage', message);
            setTimeout(() => {
@@ -127,7 +129,8 @@ const getters = {
     cleanNewUserInput: (state) => {
       return state.newUserInput = "";
     },
-    cleanUserInput: state => state.cleanUserInput = {}
+    cleanUserInput: state => state.cleanUserInput = {},
+    checkLoadingStatus: state => state.loading = !state.loading
 }
 
 export default {

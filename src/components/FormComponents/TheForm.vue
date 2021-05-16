@@ -1,6 +1,6 @@
 <template>
     <div>             
-        <div class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 w-full formShadow">
+        <div class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 border w-full formShadow">
             <TheFormComponentNavbar />
             <form class="mx-2 my-2 mt-5">
                 <router-view v-slot="Form">

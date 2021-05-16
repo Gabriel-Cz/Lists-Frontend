@@ -8,7 +8,7 @@
                 <h1 class="p-4 px-8 border-b font-display text-gray-500 text-2xl text-shadow-md">Bienvenido {{ $route.params.id }}</h1>
             </div>
             <div class="col-span-12 mt-5 flex justify-center">
-                <CreateNoteButton />
+                <CreateListButton />
             </div>
         </div>
     </div>
@@ -16,17 +16,14 @@
 
 <script>
 
-import CreateNoteButton from '@/components/Buttons/CreateNoteButton';
+import CreateListButton from '@/components/Buttons/CreateListButton';
 import { mapActions } from 'vuex';
 
     export default {
         name: "TheUserHeader",
         components: {
-            CreateNoteButton
+            CreateListButton
         },
-        data: () => ({
-            //
-        }),
         props: {
             userName: {
                 type: String,

@@ -34,8 +34,6 @@
                     </li>
                 </ol>
             </div>
-            <ShareUserInput />
-            <ShareButton />
         </div>
     </div>
 </template>
@@ -43,8 +41,6 @@
 <script>
 import EditListTitleInput from '@/components/ListsComponents/EditListTitleInput'
 import AddNewItemsInput from '@/components/ListsComponents/AddNewItemsInput'
-import ShareUserInput from '@/components/ListsComponents/ShareUserInput'
-import ShareButton from '@/components/Buttons/ShareButton'
 import { mapActions, mapState } from 'vuex'
 
     export default {
@@ -55,8 +51,6 @@ import { mapActions, mapState } from 'vuex'
         components: {
             EditListTitleInput,
             AddNewItemsInput,
-            ShareUserInput,
-            ShareButton
         },
         props: {
         listId: String,

@@ -11,14 +11,12 @@ const state = () => ({
       newTitle: "",
       newItems: "",
     },
+    editTitle: false,
     sharedUser: '',
     newList: '',
-    listsData: null,
+    listsData: [],
     listData: '',
     userId: '',
-    listsTotal: 0,
-    listsLimit: 12,
-    actualPage: 0,
 })
 
 const mutations = {
@@ -26,12 +24,26 @@ const mutations = {
       state.newListInput = payload
     },
 
+    setEditTitle(state, payload) {
+      state.editTitle = payload;
+    },
+    
     setNewTitle(state, payload) {
       state.updateListInput.newTitle = payload
     },
 
     setNewItems(state, payload) {
       state.updateListInput.newItems = payload
+    },
+
+    cleanNewListInputs(state) {
+      state.newListInput.title = '';
+      state.newListInput.items = '';
+    },
+
+    cleanUpdateListInputs(state) {
+      state.updateListInput.newTitle = '';
+      state.updateListInput.newItems = '';
     },
 
     setList(state, payload) {
@@ -60,7 +72,9 @@ const actions = {
           console.log(res.data)
           this.state.listsData = res.data
         })
-        .catch(e => {window.alert(e)})
+        .catch((err) => {
+          console.log(err);
+        })
       },  
   
     getList({commit, rootState}, id) {
@@ -71,12 +85,12 @@ const actions = {
         }
         axios.get('/api/list/' + id, config)
         .then(res => {
-          commit('setList', res.data)
+          commit('setList', res.data);
         })
-        .catch(e => {window.alert(e)})
+        .catch(e => console.log(e))
       },
   
-    postList({dispatch, rootState}, list) {
+    postList({commit, dispatch, rootState}, list) {
         let config = {
           headers: {
             token: rootState.user.token
@@ -91,6 +105,7 @@ const actions = {
                 name: 'UserLists'
               })
             }, 20)
+            commit('cleanNewListInputs', );
           },
           resolve())
           .catch(e => {
@@ -119,7 +134,12 @@ const actions = {
           .catch(e => {console.log(e)}, reject())
         })
       },
-    updateTitle({dispatch, state, rootState}, id, body) {
+
+    editTitle({commit}, payload) {
+      commit('setEditTitle', payload)
+    },
+
+    updateTitle({commit, dispatch, state, rootState}, id, body) {
       let config = {
         headers: {
           token: rootState.user.token
@@ -133,15 +153,14 @@ const actions = {
           setTimeout(() => {
             dispatch('getLists')
             dispatch('getList', id)
-            router.push({
-              path: '/'
-            })
-          }, 20)
+          }, 20),
+          commit('cleanUpdateListInputs');
+          dispatch('editTitle', false);
         }, resolve())
         .catch(e => {console.log(e)}, reject())
       })
     },
-    addNewItems({dispatch, state, rootState}, id, body) {
+    addNewItems({commit, dispatch, state, rootState}, id, body) {
       let config = {
         headers: {
           token: rootState.user.token
@@ -160,6 +179,7 @@ const actions = {
             dispatch('getList', id)
             
           }, 20)
+          commit('cleanUpdateListInputs');
         }, resolve())
         .catch(e => {console.log(e)}, reject())
       })
@@ -190,11 +210,7 @@ const actions = {
 }
 
 const getters = {
-    countLists: (state) => {
-      const listDataLenght = state.listsData.lenght;
-      const size = state.listsLimit;
-      return Math.ceil(listDataLenght/size);
-    }
+    countLists: state => state.listsData.length === 0 || null ? false : true
 }
 
 export default {

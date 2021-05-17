@@ -1,33 +1,39 @@
 <template>
     <div>
-        <div class="container mx-auto">
+        <div class="container h-full mx-auto">
             <div class="grid grid-cols-12 sm:gap-7 xl:gap-16 mx-5 xl:mx-20">
-                <TheListModel 
-                  class=" col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-4 transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"
+                <ListsLoaderComponent v-for="item in 3" :key="item.index" class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-4 transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"/>
+                <div
+                  class="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-4 transition duration-500 ease-in-out transform hover:-translate-y-50 hover:scale-105"
                   v-for="list in listsData"
-                  :listId="list._id" 
                   :key="list.index"
+                >
+                <TheListModel 
+                  :listId="list._id" 
                   :title="list.list_title" 
                   :items="list.list_items"
                   @click="toList(list._id)"
                 />
+                </div>
             </div>
+            <div v-show="showEmptyMessage" class="italic text-lg text-center mx-5 pt-4 emptyTextMessage">No tienes listas por el momento...</div>
         </div>
-        <div v-show="showEmptyListMessage" class="italic text-lg text-center transition transition-duration-500 ease-in-out mx-5 pt-4">No tienes listas por el momento...</div>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
 
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 import TheListModel from '@/components/ListsModels/TheListModel';
+import ListsLoaderComponent from '@/components/GenericsComponents/ListsLoaderComponent';
 
     export default {
         name: "UserLists",
         components: {
-            TheListModel
+            TheListModel,
+            ListsLoaderComponent
         },
         created() {
             this.$store.dispatch('lists/getLists');
@@ -35,10 +41,12 @@ import TheListModel from '@/components/ListsModels/TheListModel';
         computed: {
             ...mapState({
                 listsData: state => state.listsData,
-                listUpdateInput: state => state.listUpdateInput
+                listUpdateInput: state => state.listUpdateInput,
+                loadingLists: state => state.loadingLists,
             }),
-            showEmptyListMessage() {
-                return this.listsData[0] ===  null ? true : false;
+            ...mapGetters('lists', ['counLists']),
+            showEmptyMessage() {
+                return this.listsData === undefined || this.listsData[0] === undefined ? true : false
             }
         },
         methods: {           
@@ -54,4 +62,19 @@ import TheListModel from '@/components/ListsModels/TheListModel';
 </script>
 
 <style scoped>
+
+.emptyTextMessage {
+    animation: fadeIn 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 </style> 

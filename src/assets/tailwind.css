@@ -26,7 +26,7 @@
         @apply p-5 flex justify-center text-shadow-md font-body;
     }
     .listCard-body {
-        @apply bg-gray-100 rounded-sm h-80 shadow-lg p-1 overflow-auto font-body;
+        @apply font-body rounded-b-xl bg-gradient-to-t bg-gray-100 h-80 shadow-lg p-1 overflow-auto z-0;
     }
     .formShadow {
         box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;

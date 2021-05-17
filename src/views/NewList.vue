@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TheNewListModel/>
+        <TheNewListModel />
         <NewListFooter />
     </div>
 </template>

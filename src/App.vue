@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-backgroundPageColor border-4 relative">
+  <div id="app" class="bg-backgroundPageColor relative">
       <LoadingComponent />
       <body class="z-10 h-screen">
         <router-view />

@@ -13,6 +13,7 @@
                 />
             </div>
         </div>
+        <div v-show="showEmptyListMessage" class="italic text-lg text-center transition transition-duration-500 ease-in-out mx-5 pt-4">No tienes listas por el momento...</div>
         <router-view></router-view>
     </div>
 </template>
@@ -35,7 +36,10 @@ import TheListModel from '@/components/ListsModels/TheListModel';
             ...mapState({
                 listsData: state => state.listsData,
                 listUpdateInput: state => state.listUpdateInput
-            })
+            }),
+            showEmptyListMessage() {
+                return this.listsData[0] ===  null ? true : false;
+            }
         },
         methods: {           
             ...mapActions('lists', ['getList', 'updateList']),

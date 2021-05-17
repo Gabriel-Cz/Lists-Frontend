@@ -16,15 +16,9 @@
                 </div>
             </div>
             <div class="listCard-body">
-                <div class="flex w-full">
-                    <AddNewItemsInput />
-                    <span @click="addNewItems(id)" class="mt-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                </div>
-                <ol class="p-6 font-body text-gray-500">
+                <AddNewItemsInput />
+                <div class="h-4/6 max-w-full flex overflow-y-auto">
+                    <ol class="p-6 h-full font-body text-gray-500">
                     <li 
                       v-for="item in $props.items" 
                       :key="item.index" 
@@ -32,7 +26,8 @@
                     >
                         {{ item }} 
                     </li>
-                </ol>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
@@ -63,7 +58,7 @@ import { mapActions, mapState } from 'vuex'
             })
         },
         methods: {
-            ...mapActions('lists', ['updateTitle', 'addNewItems'])
+            ...mapActions('lists', ['updateTitle'])
         }
     }
     

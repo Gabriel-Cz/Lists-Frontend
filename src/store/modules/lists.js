@@ -13,7 +13,7 @@ const state = () => ({
     },
     sharedUser: '',
     newList: '',
-    listsData: '',
+    listsData: null,
     listData: '',
     userId: '',
     listsTotal: 0,

@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="container mx-auto">
         <div class="grid grid-cols-3 justify-center">
             <div class="col-span-5 justify-end mt-1 ml-3">
-                <button class="bg-transparent font-display text-gray-300 hover:text-gray-500 shadow-none" @click="logOut()">Cerrar Sesion</button>
+                <button class="bg-transparent font-display text-gray-400 hover:text-gray-600 shadow-none" @click="logOut()">Cerrar Sesion</button>
             </div>
             <div class="col-span-12 flex justify-center">
                 <h1 class="p-4 px-8 border-b font-display text-gray-500 text-2xl text-shadow-md">Bienvenido {{ $route.params.id }}</h1>

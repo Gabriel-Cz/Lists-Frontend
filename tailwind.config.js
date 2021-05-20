@@ -12,6 +12,7 @@ module.exports = {
     fontFamily: {
       display: ['Raleway', 'sans-serif'],
       body: ['Poppins', 'sans-serif'],
+      fontLogo: ['Poiret One', 'cursive']
     },
     extend: {
       backgroundImage: theme => ({

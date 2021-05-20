@@ -1,6 +1,6 @@
 <template>
     <div id="the-logo">
-        <div class="font-thin text-4xl opacity-0.5">SharedLists.</div>
+        <div class="font-thin text-2xl text-center pt-5 pt-sm-0 opacity-0.5 font-fontLogo">SharedLists.</div>
     </div>
 </template>
 

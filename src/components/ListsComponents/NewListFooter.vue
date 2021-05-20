@@ -1,22 +1,23 @@
 <template>
     <div>
         <div class="flex justify-end -mt-5 xl:-mr-10">
-            <button class="text-white font-regular shadow-2xl py-2 px-3 bg-secondary-main transition duration-500 ease-in-out hover:bg-secondary-hover mx-2" @click="submitList()">Crear Lista</button>
-            <button class="text-white font-regular shadow-2xl py-2 px-3 bg-danger-main transition duration-500 ease-in-out hover:bg-danger-hover mx-2" @click="closeModal()">Cancelar</button>
+            <button class="text-white text-sm md:text-base font-regular shadow-xl py-2 px-3 bg-secondary-main transition duration-500 ease-in-out hover:bg-secondary-hover mx-2 z-20" @click="submitList()">Crear Lista</button>
+            <button class="text-white text-sm md:text-base font-regular shadow-xl py-2 px-3 bg-danger-main transition duration-500 ease-in-out hover:bg-danger-hover mx-2 z-20" @click="closeModal()">Cancelar</button>
         </div>
     </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
     export default {
         name: "NewListFooter",
         computed: {
             ...mapState('lists', {
-                newListInput: state => state.newListInput
+                newListInput: state => state.newListInput,
             })
         },
         methods: {
+            ...mapMutations('lists', ['cleanNewListInputs']),
             ...mapActions('lists', ['postList']),
             submitList() {
                 const arrToDB = {
@@ -29,6 +30,7 @@ import { mapActions, mapState } from 'vuex'
                 this.$router.push({
                     name: "UserLists"
                 })
+                this.cleanNewListInputs();
             }
         }
     }

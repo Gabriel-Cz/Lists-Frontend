@@ -77,7 +77,7 @@ const actions = {
             commit('setMessage', message);
             setTimeout(() => {
             commit('setMessage', '');
-            }, 2000)
+            }, 3000)
             reject();
           })
         })
@@ -104,7 +104,7 @@ const actions = {
            commit('setMessage', message);
            setTimeout(() => {
             commit('setMessage', '');
-           }, 2000)
+           }, 3000)
        })
     },
 

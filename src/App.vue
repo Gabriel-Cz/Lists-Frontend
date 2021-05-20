@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="bg-backgroundPageColor relative">
-      <LoadingComponent />
-      <body class="z-10 h-screen">
+      <body class="z-10 min-h-screen max-h-full">
         <router-view />
       </body>
       <footer class="w-full pb-4 flex items-end justify-center text-center">
@@ -11,13 +10,5 @@
 </template>
 
 <script>
-
-import LoadingComponent from '@/components/GenericsComponents/LoadingComponent'
-
-export default {
-  components: {
-    LoadingComponent 
-  }
-}
 </script>
 

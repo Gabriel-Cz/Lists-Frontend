@@ -23,7 +23,8 @@ import { mapState } from 'vuex'
         name: "LoadingComponent",
         computed: {
             ...mapState('user', {
-                loading: state => state.loading
+                loading: state => state.loading,
+                serverStatus: state => state.serverStatus,
             })
         },
     }

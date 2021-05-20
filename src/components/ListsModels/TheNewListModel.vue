@@ -5,6 +5,9 @@
             <div class="font-body rounded-b-xl bg-gradient-to-t bg-gray-100 h-80 shadow-lg p-1 overflow-auto">
                 <div class="h-5/6 ">
                     <textarea id="textArea" v-model="newListInput.items" class="h-full w-11/12 border-gray-400 bg-transparent ml-2 p-3 focus:outline-none font-extralight" placeholder="Que articulos?" />
+                    <div class=" opacity-75 text-xs ml-5 text-gray-400">
+                        Puedes separar tus objetos con comas " , "
+                    </div>
                 </div>
             </div>
         </div>

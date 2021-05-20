@@ -1,7 +1,7 @@
 <template>
     <div>
         <button 
-          class="bg-danger-main hover:bg-danger-hover transition duration-500 ease-in-out shadow-2xl py-2 px-3 z-20"
+          class="bg-danger-main text-sm md:text-base hover:bg-danger-hover transition duration-500 ease-in-out shadow-2xl py-2 px-3 z-20"
           @click="deleteTheList(listData._id)"
         >
             Eliminar Lista

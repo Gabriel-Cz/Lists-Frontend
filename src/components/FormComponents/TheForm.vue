@@ -1,8 +1,9 @@
 <template>
     <div>             
-        <div class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 border w-full formShadow">
+        <div class="bg-bg-form-pattern rounded-3xl pb-2 pt-2 w-full transitionHeight formShadow">
             <TheFormComponentNavbar />
-            <form class="mx-2 my-2 mt-5">
+            <form class="mx-2 my-2 mt-5 relative">
+                <LoadingComponent />
                 <router-view v-slot="Form">
                   <transition :name="transitionName" mode="out-in">
                     <component :is="Form.Component" />
@@ -20,6 +21,7 @@
 <script>
 import { mapState } from 'vuex'
 import TheFormComponentNavbar from '../FormComponents/TheFormComponentNavbar'
+import LoadingComponent from '../GenericsComponents/LoadingComponent'
 import TheFormFooter from '../FormComponents/TheFormFooter'
 
     export default {
@@ -29,6 +31,7 @@ import TheFormFooter from '../FormComponents/TheFormFooter'
         }),
         components: {
             TheFormComponentNavbar,
+            LoadingComponent,
             TheFormFooter
         },
         computed: {
@@ -45,27 +48,26 @@ import TheFormFooter from '../FormComponents/TheFormFooter'
 </script>
 
 <style scoped>
+
 .slide-right-enter,
 .slide-right-leave-to{
   opacity: 0;
-  transition: all 0.3s ease-in-out;
-  transform: translateX(-50px);
+  transition: 0.3s ease-in-out;
 }
 
 .slide-right-enter-active,
 .slide-right-leave-active{
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .slide-left-enter,
 .slide-left-leave-to{
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
   opacity: 0;
-  transform: translateX(50px);
 }
 
 .slide-left-enter-active,
 .slide-left-leave-active{
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 </style>

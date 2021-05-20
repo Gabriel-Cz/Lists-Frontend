@@ -8,15 +8,19 @@
 <script>
 
 import TheUserHeader from '@/components/UserComponents/TheUserHeader';
+import { mapActions } from 'vuex';
 
     export default {
         name: "User",
         components: {
             TheUserHeader,
         },
-        data: () => ({
-            //
-        }),
+        methods: {
+            ...mapActions('user', ['readToken'])
+        },
+        created() {
+            this.readToken()
+        }
     }
 </script>
 

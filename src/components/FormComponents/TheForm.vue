@@ -52,22 +52,22 @@ import TheFormFooter from '../FormComponents/TheFormFooter'
 .slide-right-enter,
 .slide-right-leave-to{
   opacity: 0;
-  transition: 0.3s ease-in-out;
+  transition: 250ms ease-in-out;
 }
 
 .slide-right-enter-active,
 .slide-right-leave-active{
-  transition: 0.3s ease-in-out;
+  transition: 250ms ease-in-out;
 }
 
 .slide-left-enter,
 .slide-left-leave-to{
-  transition: 0.3s ease-in-out;
+  transition: 250ms ease-in-out;
   opacity: 0;
 }
 
 .slide-left-enter-active,
 .slide-left-leave-active{
-  transition: 0.3s ease-in-out;
+  transition: 250ms ease-in-out;
 }
 </style>

@@ -40,9 +40,6 @@ const mutations = {
             state.userDB = ''
         } else {
             state.userDB = decode(payload)
-            router.push({
-                path: '/user/:id'
-            })
       }
     },
     cleanUserInput(state) {
@@ -88,10 +85,16 @@ const actions = {
         axios.post('/login', user)
          .then(res => {
            let token = res.data.token;
-           dispatch('saveUser', token);
+           let username = res.data.userDB.name;
+           console.log(username);
+           let userInfo = {
+             token: token,
+             username: username
+           }
+           dispatch('saveUser', userInfo);
            commit('setLoading', false);
            router.push({
-             path: '/user/' + user.name 
+             path: '/user/' + username 
            });
            setTimeout(() => {
             commit('cleanUserInput');
@@ -108,9 +111,19 @@ const actions = {
        })
     },
 
-    saveUser({commit}, token) {
-        localStorage.setItem('token', token);
+    saveUser({commit}, userInfo) {
+        localStorage.setItem('username', userInfo.username);
+        localStorage.setItem('token', userInfo.token);
+        commit('getUser', userInfo.token);
+    },
+
+    readToken({commit}) {
+      const token = localStorage.getItem('token');
+      if(token) {
         commit('getUser', token);
+      } else {
+        commit('getUser', '');
+      }
     },
 
     signOut({commit}) {

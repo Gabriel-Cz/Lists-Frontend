@@ -10,5 +10,14 @@
 </template>
 
 <script>
+
+export default {
+  name: "App",
+  metaInfo: {
+    title: "SharedLists",
+    titleTemplate: "%s | SharedLists"
+  }
+}
+
 </script>
 

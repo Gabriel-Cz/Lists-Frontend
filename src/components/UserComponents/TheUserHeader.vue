@@ -5,7 +5,7 @@
                 <button class="bg-transparent font-display text-gray-400 hover:text-gray-600 shadow-none" @click="logOut()">Cerrar Sesion</button>
             </div>
             <div class="col-span-12 flex justify-center">
-                <h1 class="p-4 px-8 border-b font-display text-gray-500 text-2xl text-shadow-md">Bienvenido {{ $route.params.id }}</h1>
+                <h1 class="p-4 px-8 border-b font-display text-gray-500 text-2xl text-shadow-md">Bienvenido {{ $route.params.username }}</h1>
             </div>
             <div class="col-span-12 mt-5 flex justify-center">
                 <CreateListButton />
@@ -17,23 +17,20 @@
 <script>
 
 import CreateListButton from '@/components/Buttons/CreateListButton';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
     export default {
         name: "TheUserHeader",
         components: {
             CreateListButton
         },
-        props: {
-            userName: {
-                type: String,
-                default: "This User Name"
-            }
+        computed: {
+            ...mapState('user', {
+                userName: state => state.userName
+            })
         },
         methods: {
-
             ...mapActions('user', ['signOut']),
-
             logOut() {
                 this.signOut();
             }

@@ -2,8 +2,8 @@
     <div>
         <div class="container flex flex-col justify-center">
             <div class="text-center">
-                <div class="lg:mt-5">
-                    <img src="../assets/ImageList.png" />
+                <div class="lg:mt-5 p-10 p-sm-0">
+                    <img src="../assets/ListImage.svg" />
                 </div>
             </div>
         </div>

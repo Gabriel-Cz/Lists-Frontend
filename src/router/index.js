@@ -1,5 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import rootState from '../store/index'
+import { createRouter, createWebHistory } from 'vue-router' 
 import Home from '../views/Home.vue'
 
 const routes = [
@@ -74,16 +73,16 @@ const router = createRouter({
   routes
 }) 
 
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
 
   const routeProtected = to.matched.some(record => record.meta.requiresAuth);
 
-  if(routeProtected && rootState.token === "") {
+  if(routeProtected && store.modules.user.token === "") {
     next({name: 'Login'});
   } else {
     next();
   }
   
-});
+});*/
 
 export default router

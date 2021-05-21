@@ -56,28 +56,25 @@ const mutations = {
 const actions = {
 
     registerUser({commit, state, dispatch}, payload) {
-        return new Promise((resolve, reject) => {
-          payload = state.newUserInput;
-          commit('setLoading', true);
-          axios.post('/users/new-user', payload)
-          .then(() => {
-            setTimeout(async() => {
-              await dispatch('loginUser', {email: payload.email, password: payload.password})
-              setTimeout(() => {
-                 commit('cleanNewUserInput');
-              }, 100)
-            }, 200)
-          }, resolve())
-          .catch(err => {
-            commit('setLoading', false);
-            const message = err.response.data.message;
-            commit('setMessage', message);
-            setTimeout(() => {
-            commit('setMessage', '');
-            }, 3000)
-            reject();
-          })
-        })
+      payload = state.newUserInput;
+      commit('setLoading', true);
+      axios.post('/users/new-user', payload)
+      .then(() => {
+        setTimeout(async() => {
+          await dispatch('loginUser', {email: payload.email, password: payload.password})
+          setTimeout(() => {
+             commit('cleanNewUserInput');
+          }, 300)
+        }, 500)
+      })
+      .catch(err => {
+        commit('setLoading', false);
+        const message = err.response.data.message;
+        commit('setMessage', message);
+        setTimeout(() => {
+          commit('setMessage', '');
+        }, 3000)
+      })
     }, 
 
     loginUser({commit, state, dispatch}, user) {
@@ -86,7 +83,6 @@ const actions = {
          .then(res => {
            let token = res.data.token;
            let username = res.data.userDB.name;
-           console.log(username);
            let userInfo = {
              token: token,
              username: username

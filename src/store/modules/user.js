@@ -7,6 +7,7 @@ const state = () => ({
     userDB: '',
     message: '',
     loading: false,
+    userError: false,
     userInput: {
       email: '',
       password: ''
@@ -22,115 +23,107 @@ const mutations = {
     setNewUserInput(state, payload) {
       state.newUserInput = payload
     },
+
     setUserInput(state, payload) {
       state.userInput = payload
     },
+
     setUser(state, payload) {
         state.newUser = payload
     },
+
     setMessage(state, payload) {
       state.message = payload
     },
+
     setLoading(state, payload) {
       state.loading = payload;
     },
+
     getUser(state, payload) {
         state.token = payload
-        if(payload === '') {
-            state.userDB = ''
-        } else {
-            state.userDB = decode(payload)
-      }
+
+        payload === '' ? 
+        state.userDB = '' :
+        state.userDB = decode(payload); 
     },
+
     cleanUserInput(state) {
       state.userInput.email = "";
       state.userInput.password = "";
     },
+
     cleanNewUserInput(state) {
       state.newUserInput.name = "";
       state.newUserInput.email = "";
       state.newUserInput.password = "";
+    },
+
+    setUserError(state, payload) {
+      state.userError = payload;
     }
+
 }
 
 const actions = {
 
-    registerUser({commit, state, dispatch}, payload) {
-      payload = state.newUserInput;
+    async registerUser({commit, state, dispatch}, user) {
+      user = state.newUserInput;
       commit('setLoading', true);
-      axios.post('/users/new-user', payload)
-      .then(() => {
-        setTimeout(async() => {
-          await dispatch('loginUser', {email: payload.email, password: payload.password})
-          setTimeout(() => {
-             commit('cleanNewUserInput');
-          }, 300)
-        }, 500)
-      })
-      .catch(err => {
+      try {
+        await axios.post('/users/new-user', user);
+        await dispatch('loginUser', { email: user.email, password: user.password });
         commit('setLoading', false);
-        const message = err.response.data.message;
-        commit('setMessage', message);
-        setTimeout(() => {
-          commit('setMessage', '');
-        }, 3000)
-      })
+        commit('cleanNewUserInput');
+      } catch (error) {
+          commit('setLoading', false);
+          dispatch('userError', error.response.data.message);
+      }
     }, 
 
-    loginUser({commit, state, dispatch}, user) {
-      commit('setLoading', state.loading === false ? true : false);
-        axios.post('/login', user)
-         .then(res => {
-           let token = res.data.token;
-           let username = res.data.userDB.name;
-           let userInfo = {
-             token: token,
-             username: username
-           }
-           dispatch('saveUser', userInfo);
-           commit('setLoading', false);
-           router.push({
-             path: '/user/' + username 
-           });
-           setTimeout(() => {
-            commit('cleanUserInput');
-           }, 200)
-           commit('setLoading', false);
-         })
-         .catch(err => {
-           commit('setLoading', false);
-           const message = err.response.data.message;
-           commit('setMessage', message);
-           setTimeout(() => {
-            commit('setMessage', '');
-           }, 3000)
-       })
-    },
-
-    saveUser({commit}, userInfo) {
-        localStorage.setItem('username', userInfo.username);
-        localStorage.setItem('token', userInfo.token);
-        commit('getUser', userInfo.token);
-    },
-
-    readToken({commit}) {
-      const token = localStorage.getItem('token');
-      if(token) {
-        commit('getUser', token);
-      } else {
-        commit('getUser', '');
+    async loginUser({commit, dispatch}, user) {
+      commit('setLoading', true);
+      try {
+        let loginResponse = await axios.post('/login', user);
+        const { token, name } = loginResponse.data;
+        await dispatch('saveUser', token, name);
+        commit('setLoading', false);
+        commit('cleanUserInput');
+        router.push({
+          path: `/user/${name}` 
+        });
+      } catch (error) {
+          commit('setLoading', false);
+          dispatch('userError', error.response.data.message);
       }
     },
 
-    signOut({commit}) {
-        commit('getUser', '');
-        localStorage.removeItem('token');
-        setTimeout(() => {
-          router.push({
-            name: 'Register'
-          });
-        }, 200)
+    saveUser({commit}, token, username) {
+      localStorage.setItem('username', username);
+      localStorage.setItem('token', token);
+      commit('getUser', token);
     },
+
+    readToken({commit}) {
+      const token = localStorage.getItem('token');      
+      if(token) commit('getUser', token);
+      else commit('getUser', '');
+    },
+
+    async signOut({commit}) {
+      await commit('getUser', '');
+      localStorage.removeItem('token');
+      router.push({
+        name: 'Login'
+      });
+    },
+
+    userError({commit}, error) {
+      commit('setUserError', error);
+      setTimeout(() => {
+        commit('setUserError', false);
+      }, 2500);
+    }
 }
 
 const getters = {

@@ -1,6 +1,15 @@
 import router from '../../router/index'
 import axios from 'axios'
 
+function config(token) {
+  let config = {
+    headers: {
+      token: token
+    }
+  }
+  return config;
+}
+
 const state = () => ({
     newListInput: {
       title: "",
@@ -16,10 +25,12 @@ const state = () => ({
     newList: '',
     listsData: [],
     listData: '',
+    listsError: false,
     userId: '',
 })
 
 const mutations = {
+  
     setInput(state, payload) {
       state.newListInput = payload
     },
@@ -53,137 +64,107 @@ const mutations = {
     setLists(state, payload) {
       state.listsData = payload
     },
+
+    setNewList(state, list) {
+      state.listsData = [...state.listsData, list];
+    },
+
+    setUpdatedList(state, updatedList, filter) {
+      let updatedArray = state.lists.map(list => (
+        list._id === updatedList._id ?
+        list[filter] = updatedList[filter] : false
+      ));
+      state.listsData = updatedArray;
+    },
+     
+    setDeleteList(state, id) {
+      state.listsData = state.listsData.filter(list => list._id !== id);
+    }, 
     
     setSharedUser(state, payload) {
       state.sharedUser = payload
-    }
+    },
+
+    setListsError(state, error) {
+      state.listsError = error;
+    },
+
 }
 
 const actions = {
 
-    getLists({rootState}){
-        let config = {
-            headers: {
-                token: rootState.user.token
-            }
-        }
-        axios.get('/api/lists', config)
-        .then(res => {
-          console.log(res.data)
-          this.state.listsData = res.data
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-      },  
+    async getLists({rootState, commit, dispatch}) {
+      try {
+        let listsResponse = await axios.get('/api/lists', config(rootState.user.token));
+        console.log(listsResponse.data);
+        commit('setLists', listsResponse.data);
+      } catch (error) {
+        dispatch('listsError',  error.response.data.message);
+      }
+    },  
   
-    getList({commit, rootState}, id) {
-        let config = {
-          headers: {
-            token: rootState.user.token
-          }
-        }
-        axios.get('/api/list/' + id, config)
-        .then(res => {
-          commit('setList', res.data);
-        })
-        .catch(e => console.log(e))
-      },
+    async getList({commit, rootState, dispatch}, id) {
+      try {
+        let listResponse = await axios.get('/api/list/' + id, config(rootState.user.token));
+        commit('setList', listResponse.data);
+      } catch (error) {
+        dispatch('listsError',  error.response.data.message);
+      }
+    },
   
-    postList({commit, dispatch, rootState}, list) {
-        let config = {
-          headers: {
-            token: rootState.user.token
-          }
-        }
-        return new Promise((resolve, reject) => {
-          axios.post('/api/new-list', list, config)
-          .then(() => {
-            setTimeout(() => {
-              dispatch('getLists')
-              router.push({
-                name: 'UserLists'
-              })
-            }, 20)
-            commit('cleanNewListInputs', );
-          },
-          resolve())
-          .catch(e => {
-            window.alert(e)
-            reject()
-          })
+    async postList({commit, rootState , dispatch}, list) {
+      try {
+        let postedList = await axios.post('/api/new-list', list, config(rootState.user.token));
+        await commit('setNewList', postedList.data);
+        commit('cleanNewListInputs');
+        router.push({
+          name: 'UserLists'
         })
-      },
-    deleteList({dispatch, rootState}, id) {
-        let config = {
-          headers: {
-            token: rootState.user.token
-          }
-        }
-        return new Promise((resolve, reject) => {
-          axios.delete('/api/list/' + id, config)
-          .then(res => {
-            console.log(res.data)
-            setTimeout(() => {
-              dispatch('getLists')
-              router.push({
-                name: 'UserLists'
-              })
-            }, 20)
-          }, resolve())
-          .catch(e => {console.log(e)}, reject())
-        })
-      },
-
-    editTitle({commit}, payload) {
-      commit('setEditTitle', payload)
+      } catch (error) {
+        dispatch('listsError', error.response.data.message);
+      }
     },
 
-    updateTitle({commit, dispatch, state, rootState}, id, body) {
-      let config = {
-        headers: {
-          token: rootState.user.token
-        }
+    async deleteList({commit, rootState, dispatch}, id) {
+      try {
+        await axios.delete('/api/list/' + id, config(rootState.user.token));
+        commit('setDeleteList');
+        router.push({
+          name: 'UserLists'
+        })
+      } catch (error) {
+        dispatch('listsError',  error.response.data.message);
       }
-      body = {newTitle: state.updateListInput.newTitle};
-      return new Promise((resolve, reject) => {
-        axios.put('/api/list/updateTitle/' + id, body, config)
-        .then(res => {
-          console.log(res.data)
-          setTimeout(() => {
-            dispatch('getLists')
-            dispatch('getList', id)
-          }, 20),
-          commit('cleanUpdateListInputs');
-          dispatch('editTitle', false);
-        }, resolve())
-        .catch(e => {console.log(e)}, reject())
-      })
     },
-    addNewItems({commit, dispatch, state, rootState}, id, body) {
-      let config = {
-        headers: {
-          token: rootState.user.token
-        }
+
+    editTitle({commit}, title) {
+      commit('setEditTitle', title)
+    },
+
+    async updateTitle({commit, dispatch, state, rootState}, id, body) {
+      body = { newTitle: state.updateListInput.newTitle };
+      try {
+        let editedListResponse = await axios.put('/api/list/updateTitle/' + id, body, config(rootState.user.token));
+        await commit('setUpdatedList', editedListResponse.data, 'list_title');
+        dispatch('editTitle', false);
+      } catch (error) {
+        dispatch('listsError',  error.response.data.message);
       }
+    },
+
+    async addNewItems({commit, state, rootState, dispatch}, id, body) {
       body = {
         newItems: state.updateListInput.newItems.split(',')
       };
-      console.log(body)
-      return new Promise((resolve, reject) => {
-        axios.put('/api/list/addNewItems/' + id, body, config)
-        .then(res => {
-          console.log(res.data)
-          setTimeout(() => {
-            dispatch('getLists')
-            dispatch('getList', id)
-            
-          }, 20)
-          commit('cleanUpdateListInputs');
-        }, resolve())
-        .catch(e => {console.log(e)}, reject())
-      })
+      try {
+        let newItemsResponse = await axios.put('/api/list/addNewItems/' + id, body, config(rootState.user.token));
+        await commit('setUpdatedList', newItemsResponse.data, 'list_items');
+        commit('cleanUpdateListInputs');
+      } catch (error) {
+        dispatch('listsError',  error.response.data.message);
+      }
     },
+
     addSharedUser({dispatch, state, rootState}, id) {
       let config = {
         headers: {
@@ -206,7 +187,18 @@ const actions = {
         }, resolve())
         .catch(e => {console.log(e)}, reject())
       })
-    }
+    },
+
+    listsError({commit}, error) {
+      router.push({
+        name: 'UserLists'
+      })
+      commit('setListsError', error);
+      setTimeout(() => {
+        commit('setListsError', false);
+      }, 2500)
+    },
+
 }
 
 const getters = {

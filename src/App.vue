@@ -4,7 +4,7 @@
         <router-view />
       </body>
       <footer class="w-full pb-4 flex items-end justify-center text-center">
-        <small class="text-gray-400">SharedLists ° 2020</small>
+        <small class="text-gray-400 pt-5">SharedLists ° 2020</small>
       </footer>
   </div> 
 </template>

@@ -6,7 +6,7 @@
 
 <script>
 
-import TheListComponent from '@/components/ListsModels/TheListComponent.vue';
+import TheListComponent from '@/components/Lists/ListsModels/TheListComponent.vue';
 
 export default {
   components: {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router' 
-import Home from '../views/Home.vue'
+import Home from '../views/Home/Home.vue'
 
 const routes = [
   {
@@ -10,47 +10,47 @@ const routes = [
       {
         path: '',
         name: 'Register',
-        component: () => import(/* webpackChunkName: "Register" */ '../views/Register.vue')
+        component: () => import(/* webpackChunkName: "SignUp" */ '../views/Home/SignUp/SignUp.vue')
       },
       {
         path: '/login',
         name: 'Login',
-        component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
+        component: () => import(/* webpackChunkName: "Login" */ '../views/Home/Login/Login.vue')
       }
     ]
   },
   {
     path: '/user/:username',
     name: 'User',
-    component: () => import(/* webpackChunkName: "User" */ '../views/User.vue'),
+    component: () => import(/* webpackChunkName: "User" */ '../views/User/User.vue'),
     meta: { requiresAuth: true },
     children: [
       {
         path: '',
         name: 'UserLists',
-        component: () => import(/* webpackChunkName: "UserLists" */ '../views/UserLists'),
+        component: () => import(/* webpackChunkName: "UserLists" */ '../views/User/UserLists/UserLists.vue'),
         children: [
           {
             path: 'list/:id',
             name: 'ListContainer',
-            component: () => import(/* webpackChunkName: "ListContainer" */ '../views/ListContainer'),
+            component: () => import(/* webpackChunkName: "ListContainer" */ '../views/List/ListsContainers/ListContainer.vue'),
             children: [
               {
                 path: '',
                 name: 'List',
-                component: () => import(/* webpackChunkName: "List" */ '../views/List'),
+                component: () => import(/* webpackChunkName: "List" */ '../views/List/List.vue'),
               }
             ]
           },
           {
             path: 'new-list',
             name: 'NewListContainer',
-            component: () => import(/* webpackChunkName: "NewListContainer" */ '../views/NewListContainer'),
+            component: () => import(/* webpackChunkName: "NewListContainer" */ '../views/List/ListsContainers/NewListContainer.vue'),
             children: [
               {
                 path: '',
                 name: 'new-list',
-                component: () => import(/* webpackChunkName: "NewList" */ '../views/NewList')
+                component: () => import(/* webpackChunkName: "NewList" */ '../views/List/NewList/NewList')
               }
             ]
           }

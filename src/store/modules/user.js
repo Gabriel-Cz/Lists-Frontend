@@ -13,7 +13,7 @@ const state = () => ({
       password: ''
     },
     newUserInput: {
-      name: '',
+      username: '',
       email: '',
       password: '',
     },
@@ -71,7 +71,7 @@ const actions = {
       user = state.newUserInput;
       commit('setLoading', true);
       try {
-        await axios.post('/users/new-user', user);
+        await axios.post('/user/signUp', user);
         await dispatch('loginUser', { email: user.email, password: user.password });
         commit('setLoading', false);
         commit('cleanNewUserInput');
@@ -85,12 +85,12 @@ const actions = {
       commit('setLoading', true);
       try {
         let loginResponse = await axios.post('/login', user);
-        const { token, name } = loginResponse.data;
-        await dispatch('saveUser', token, name);
+        const { token, username } = loginResponse.data;
+        await dispatch('saveUser', token, username);
         commit('setLoading', false);
         commit('cleanUserInput');
         router.push({
-          path: `/user/${name}` 
+          path: `/user/${username}` 
         });
       } catch (error) {
           commit('setLoading', false);
